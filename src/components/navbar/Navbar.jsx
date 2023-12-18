@@ -6,7 +6,7 @@ import CustomButton from "./CustomButton";
 const Navbar = () => {
     return (
         <div className="w-full h-16  bg-[#eff1f3] flex justify-center">
-            <div className="flex items-center h-full  gap-3 w-[75%]">
+            <div className="flex items-center h-full gap-3 w-[75%]">
                 <Logo />
 
                 <Search
