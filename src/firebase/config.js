@@ -5,13 +5,15 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAQZ3-uGIFGHh2zUew18HLwIijdEm8XzfM",
-    authDomain: "old-clone-react.firebaseapp.com",
-    projectId: "old-clone-react",
-    storageBucket: "old-clone-react.appspot.com",
-    messagingSenderId: "752330575615",
-    appId: "1:752330575615:web:244c35a71ca1a81245c6ca",
+    apiKey: "AIzaSyCi-Ew-fGt1muESAw-PMGws28mJEXGCzig",
+    authDomain: "olx-clone-react-7da81.firebaseapp.com",
+    projectId: "olx-clone-react-7da81",
+    storageBucket: "olx-clone-react-7da81.appspot.com",
+    messagingSenderId: "75299453206",
+    appId: "1:75299453206:web:8f6c06d6c4674cc4db7837",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+export default app;
