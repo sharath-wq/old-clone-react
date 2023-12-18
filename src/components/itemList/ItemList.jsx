@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Item from "../Item/Item";
 
 const ItemList = () => {
@@ -6,7 +7,9 @@ const ItemList = () => {
             <div className="w-[75%] h-screen  mt-10">
                 <h2 className="text-2xl ">Fresh Recommendations</h2>
                 <div className="flex justify-center flex-wrap gap-5">
-                    <Item />
+                    <Link to={"/product"}>
+                        <Item />
+                    </Link>
                     <Item />
                     <Item />
                     <Item />
