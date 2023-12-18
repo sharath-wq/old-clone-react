@@ -3,7 +3,7 @@ import { submenu } from "../../constents";
 
 const Submenu = () => {
     return (
-        <div className="flex w-full justify-center h-10 border-2 mt-1">
+        <div className="flex w-full justify-center h-10  mt-1 pt-20">
             <div className="flex items-center h-full gap-3 w-[75%]">
                 <div className="flex gap-2 items-center">
                     <span className="text-sm font-bold">ALL CATEGORIES</span>
