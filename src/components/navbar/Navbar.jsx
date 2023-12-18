@@ -2,8 +2,11 @@ import Logo from "./Logo";
 import { FaSearch, FaAngleDown } from "react-icons/fa";
 import Search from "./Search";
 import CustomButton from "./CustomButton";
+import { useState } from "react";
 
 const Navbar = () => {
+    const [country, setCountry] = useState("India");
+
     return (
         <div className="w-full h-16  bg-[#eff1f3] flex justify-center">
             <div className="flex items-center h-full gap-3 w-[75%]">
@@ -17,7 +20,7 @@ const Navbar = () => {
                         <input
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full p-4 outline-none"
                             type="text"
-                            value="India"
+                            value={country}
                         />
                     }
                 />
