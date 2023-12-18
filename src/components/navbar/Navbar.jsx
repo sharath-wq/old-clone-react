@@ -8,7 +8,7 @@ const Navbar = () => {
     const [country, setCountry] = useState("India");
 
     return (
-        <div className="w-full h-16  bg-[#eff1f3] flex justify-center">
+        <div className="w-full h-16 bg-[#eff1f3] flex justify-center border-2 border-b-white shadow-lg fixed top-0 z-[999]">
             <div className="flex items-center h-full gap-3 w-[75%]">
                 <Logo />
 
