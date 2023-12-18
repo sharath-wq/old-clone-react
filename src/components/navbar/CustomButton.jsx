@@ -35,7 +35,7 @@ const CustomButton = () => {
                         viewBox="0 0 1024 1024"
                         data-aut-id="icon"
                         className=""
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                     >
                         <path
                             className="rui-lquEm"
