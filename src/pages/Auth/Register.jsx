@@ -9,9 +9,17 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [rePassword, setrePassword] = useState("");
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Resiter");
+    };
+
     return (
         <div className="w-full h-screen flex justify-center items-center bg-[#eff1f3]">
-            <div className="w-[400px] h-[800px]  flex flex-col justify-center items-center rounded-lg bg-white gap-5">
+            <form
+                onSubmit={handleSubmit}
+                className="w-[400px] h-[800px]  flex flex-col justify-center items-center rounded-lg bg-white gap-5"
+            >
                 <img
                     src="https://seeklogo.com/images/O/olx-logo-20F1656D13-seeklogo.com.png"
                     alt="olx logo"
@@ -57,7 +65,10 @@ const Register = () => {
                     onChange={(e) => setrePassword(e.target.value)}
                 />
 
-                <button className="bg-[#002f34] w-[90%] p-3 rounded-lg capitalize border-4 border-transparent hover:border-[#002f34] hover:bg-white hover:text-[#002f34] text-white">
+                <button
+                    type="submit"
+                    className="bg-[#002f34] w-[90%] p-3 rounded-lg capitalize border-4 border-transparent hover:border-[#002f34] hover:bg-white hover:text-[#002f34] text-white"
+                >
                     Register
                 </button>
 
@@ -69,9 +80,12 @@ const Register = () => {
                 </button>
 
                 <span>
-                    Have an account <Link to={"/login"}>Login</Link>
+                    Have an account{" "}
+                    <Link className="font-medium underline" to={"/login"}>
+                        Login
+                    </Link>
                 </span>
-            </div>
+            </form>
         </div>
     );
 };

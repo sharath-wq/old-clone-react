@@ -6,9 +6,17 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Login");
+    };
+
     return (
         <div className="w-full h-screen flex justify-center items-center bg-[#eff1f3]">
-            <div className="w-[400px] h-[600px]  flex flex-col justify-center items-center rounded-lg bg-white gap-5">
+            <form
+                onSubmit={handleSubmit}
+                className="w-[400px] h-[600px]  flex flex-col justify-center items-center rounded-lg bg-white gap-5"
+            >
                 <img
                     src="https://seeklogo.com/images/O/olx-logo-20F1656D13-seeklogo.com.png"
                     alt="olx logo"
@@ -43,9 +51,12 @@ const Login = () => {
                 </button>
 
                 <span>
-                    Don't have and account <Link to={"/register"}>Register</Link>
+                    Don't have and account{" "}
+                    <Link className="font-medium underline" to={"/register"}>
+                        Register
+                    </Link>
                 </span>
-            </div>
+            </form>
         </div>
     );
 };
