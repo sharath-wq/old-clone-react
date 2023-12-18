@@ -1,17 +1,9 @@
-import Navbar from "./components/navbar/Navbar";
-import Submenu from "./components/submenu/Submenu";
-import ItemList from "./components/itemList/ItemList";
-import Footer from "./components/footer/Footer";
+import router from "./router.jsx";
+
+import { RouterProvider } from "react-router-dom";
 
 const App = () => {
-    return (
-        <div>
-            <Navbar />
-            <Submenu />
-            <ItemList />
-            <Footer />
-        </div>
-    );
+    return <RouterProvider router={router}></RouterProvider>;
 };
 
 export default App;

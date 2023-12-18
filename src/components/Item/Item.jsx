@@ -6,7 +6,7 @@ const Item = () => {
             <div className="p-2 border-t border-r border-l border-[#cecdcd] relative ">
                 <img
                     className="w-full h-40 object-contain"
-                    src="https://apollo.olx.in/v1/files/1qmhe3w1w5ca3-IN/image;s=600x1200;q=60"
+                    src="https://apollo.olx.in/v1/files/hrp3qbzjgd4k2-IN/image;s=600x1200;q=60"
                     alt=""
                 />
                 <span className="px-2 w-20 h-4 text-xs uppercase py-0.5 rounded-sm bg-[#ffce32] font-light absolute top-2 flex items-center left-3">
