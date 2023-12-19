@@ -1,15 +1,32 @@
 import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const { login } = useAuth();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Login");
+
+        try {
+            setLoading(true);
+            const result = await login(email, password);
+
+            console.log(result);
+
+            return navigate("/");
+        } catch (error) {
+            console.log(error);
+        }
+
+        setLoading(false);
     };
 
     return (
