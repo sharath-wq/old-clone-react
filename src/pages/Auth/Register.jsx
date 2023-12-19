@@ -94,10 +94,24 @@ const Register = () => {
 
                 <button
                     type="submit"
-                    className="bg-[#002f34] w-[90%] p-3 rounded-lg capitalize border-4 border-transparent hover:border-[#002f34] hover:bg-white hover:text-[#002f34] text-white"
+                    className={`bg-[#002f34] w-[90%] p-3 rounded-lg capitalize border-4 border-transparent hover:border-[#002f34] hover:bg-white hover:text-[#002f34] text-white relative ${
+                        loading ? "h-[50px]" : ""
+                    }`}
                     disabled={loading}
+                    style={{ minHeight: "56px" }}
                 >
-                    Register
+                    <div
+                        style={{
+                            visibility: loading ? "visible" : "hidden",
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                        }}
+                    >
+                        <div className="spinner border-t-2 border-b-2 border-[#002f34] rounded-full h-6 w-6 animate-spin"></div>
+                    </div>
+                    {!loading && "Register"} {/* Display 'Register' text only when not loading */}
                 </button>
 
                 <button className="p-2 border w-[90%]">
