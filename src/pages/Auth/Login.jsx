@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { FirebaseContext } from "../../store/Context";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -10,21 +10,21 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const { login } = useAuth();
+    const { firebase } = useContext(FirebaseContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            setLoading(true);
-            const result = await login(email, password);
-
-            return navigate("/");
-        } catch (error) {
-            console.log(error);
-        }
-
-        setLoading(false);
+        e.preventDefault();
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                navigate("/");
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
     };
 
     return (

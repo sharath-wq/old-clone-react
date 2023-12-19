@@ -2,14 +2,17 @@ import Logo from "./Logo";
 import { FaSearch, FaAngleDown } from "react-icons/fa";
 import Search from "./Search";
 import CustomButton from "./CustomButton";
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext, FirebaseContext } from "../../store/Context";
 
 const Navbar = () => {
     const [country, setCountry] = useState("India");
 
-    const { currentUser } = useAuth();
+    const { user } = useContext(AuthContext);
+    const { firebase } = useContext(FirebaseContext);
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setCountry(e.target.value);
@@ -57,8 +60,22 @@ const Navbar = () => {
                     <FaAngleDown />
                 </div>
 
-                {currentUser ? (
-                    <span className="font-medium">{currentUser.displayName}</span>
+                {user ? (
+                    <div className="flex flex-col group">
+                        <span>{user.displayName}</span>
+
+                        <div className="hidden main-color rounded-md group-hover:flex flex-col absolute">
+                            <button
+                                className="hidden main-color rounded-md group-hover:flex flex-col absolute pt-10 cursor-pointer"
+                                onClick={() => {
+                                    firebase.auth().signOut();
+                                    navigate("/login");
+                                }}
+                            >
+                                Logout
+                            </button>
+                        </div>
+                    </div>
                 ) : (
                     <Link to={"/login"} className="font-semibold underline">
                         Login

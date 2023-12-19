@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../firebase/config";
+import { FirebaseContext } from "../../store/Context";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -14,32 +12,27 @@ const Register = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate();
+    const { firebase } = useContext(FirebaseContext);
 
-    const { signup } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (password !== rePassword) {
-            return setError("Password do not match");
-        }
-        try {
-            setError("");
-            setLoading(true);
-            const result = await signup(email, password);
-
-            result.user.displayName = name;
-
-            await addDoc(collection(db, "users"), {
-                id: result.user.uid,
-                phone: phone,
+        setLoading(true);
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((result) => {
+                result.user.updateProfile({ displayName: name }).then(() => {
+                    firebase
+                        .firestore()
+                        .collection("users")
+                        .add({ id: result.user.uid, username: name, phone: phone })
+                        .then(() => {
+                            navigate("/login");
+                        });
+                });
             });
-
-            return navigate("/login");
-        } catch (error) {
-            setError("Faild to create and account");
-            console.log(error);
-        }
         setLoading(false);
     };
 
@@ -113,7 +106,7 @@ const Register = () => {
                     >
                         <div className="spinner border-t-2 border-b-2 border-[#002f34] rounded-full h-6 w-6 animate-spin"></div>
                     </div>
-                    {!loading && "Register"} {/* Display 'Register' text only when not loading */}
+                    {!loading && "Register"}
                 </button>
 
                 <button className="p-2 border w-[90%]">
