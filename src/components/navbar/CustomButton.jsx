@@ -1,8 +1,23 @@
+import { useContext } from "react";
 import { FaPlus } from "react-icons/fa";
+import { AuthContext } from "../../store/Context";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const CustomButton = () => {
+    const { user } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        if (user) {
+            navigate("/sell");
+        } else {
+            navigate("/login");
+        }
+    };
+
     return (
-        <div className="relative">
+        <button onClick={handleClick} className="relative">
             <svg width="104" height="48" viewBox="0 0 1603 768" className="_20oLV">
                 <g>
                     <path
@@ -45,7 +60,7 @@ const CustomButton = () => {
                 </span>
                 <span>Sell</span>
             </div>
-        </div>
+        </button>
     );
 };
 
