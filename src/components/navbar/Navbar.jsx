@@ -2,11 +2,14 @@ import Logo from "./Logo";
 import { FaSearch, FaAngleDown } from "react-icons/fa";
 import Search from "./Search";
 import CustomButton from "./CustomButton";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
     const [country, setCountry] = useState("India");
+
+    const { currentUser } = useAuth();
 
     const handleChange = (e) => {
         setCountry(e.target.value);
@@ -54,9 +57,13 @@ const Navbar = () => {
                     <FaAngleDown />
                 </div>
 
-                <Link to={"/login"} className="font-semibold underline">
-                    Login
-                </Link>
+                {currentUser ? (
+                    <span className="font-medium">{currentUser.displayName}</span>
+                ) : (
+                    <Link to={"/login"} className="font-semibold underline">
+                        Login
+                    </Link>
+                )}
 
                 <CustomButton />
             </div>

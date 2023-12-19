@@ -28,6 +28,8 @@ const Register = () => {
             setLoading(true);
             const result = await signup(email, password);
 
+            result.user.displayName = name;
+
             await addDoc(collection(db, "users"), {
                 id: result.user.uid,
                 phone: phone,

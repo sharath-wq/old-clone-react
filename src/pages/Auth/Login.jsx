@@ -19,8 +19,6 @@ const Login = () => {
             setLoading(true);
             const result = await login(email, password);
 
-            console.log(result);
-
             return navigate("/");
         } catch (error) {
             console.log(error);
