@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseContext } from "../../store/Context";
+import toast from "react-hot-toast";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -18,6 +19,40 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!name) {
+            toast.error("Name is required");
+            return;
+        }
+
+        if (!email) {
+            toast.error("Email is required");
+            return;
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+            toast.error("Invalid email address");
+            return;
+        }
+
+        if (!phone) {
+            toast.error("Phone number is required");
+        }
+
+        if (!password) {
+            toast.error("Password is required");
+            return;
+        } else if (password.length < 6) {
+            toast.error("Password must be at least 6 characters");
+            return;
+        }
+
+        if (!rePassword) {
+            toast.error("Please confirm your password");
+            return;
+        } else if (rePassword !== password) {
+            toast.error("Passwords do not match");
+            return;
+        }
+
         setLoading(true);
         firebase
             .auth()

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseContext } from "../../store/Context";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -15,7 +16,19 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        e.preventDefault();
+        if (!email) {
+            toast.error("Email is required");
+            return;
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+            toast.error("Invalid email address");
+            return;
+        }
+
+        if (!password) {
+            toast.error("Password is required");
+            return;
+        }
+
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
@@ -23,7 +36,7 @@ const Login = () => {
                 navigate("/");
             })
             .catch((error) => {
-                alert(error.message);
+                toast.error("Invalid Credentials");
             });
     };
 

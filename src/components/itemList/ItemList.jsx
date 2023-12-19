@@ -29,7 +29,6 @@ const ItemList = () => {
             });
     }, []);
 
-    console.log(products);
     return (
         <div className="flex justify-center w-full">
             <div className="w-[75%] h-screen  mt-10">
