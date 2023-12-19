@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import toast from "react-hot-toast";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -8,10 +12,30 @@ const Register = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
     const [rePassword, setrePassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    const { signup } = useAuth();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Resiter");
+        if (password !== rePassword) {
+            return setError("Password do not match");
+        }
+        try {
+            setError("");
+            setLoading(true);
+            const result = await signup(email, password);
+
+            await addDoc(collection(db, "users"), {
+                id: result.user.uid,
+                phone: phone,
+            });
+        } catch (error) {
+            setError("Faild to create and account");
+            console.log(error);
+        }
+        setLoading(false);
     };
 
     return (
@@ -68,6 +92,7 @@ const Register = () => {
                 <button
                     type="submit"
                     className="bg-[#002f34] w-[90%] p-3 rounded-lg capitalize border-4 border-transparent hover:border-[#002f34] hover:bg-white hover:text-[#002f34] text-white"
+                    disabled={loading}
                 >
                     Register
                 </button>
