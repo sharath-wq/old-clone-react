@@ -1,6 +1,6 @@
 import { IoIosFlash } from "react-icons/io";
 
-const Details = () => {
+const Details = ({ name, description, price }) => {
     return (
         <div className="w-[75%]">
             <div className="mx-16 mt-10 flex justify-between">
@@ -9,11 +9,11 @@ const Details = () => {
                         <IoIosFlash />
                         featured
                     </span>
-                    <span className="text-4xl font-bold mt-2">Renault Duster (2016)</span>
-                    <span className="mt-2 text-base font-light">2015-2019 1.5 110 PS RxZ 4x2 AMT Diesel</span>
+                    <span className="text-4xl font-bold mt-2">{name}</span>
+                    {/* <span className="mt-2 text-base font-light">2015-2019 1.5 110 PS RxZ 4x2 AMT Diesel</span> */}
                 </div>
                 <div className="h-36 bg-white w-[33%] rounded-lg p-4 flex flex-col justify-between box-border">
-                    <span className="text-5xl font-bold text-[#002f34]">₹ 4,50,000</span>
+                    <span className="text-5xl font-bold text-[#002f34]">₹ {price}</span>
                     <button className="w-full bg-[#002f34] text-white py-2 rounded-md border-4 hover:bg-white border-[#002f34] text-base font-semibold hover:text-[#002f34] hover:font-bold">
                         Make offer
                     </button>
@@ -27,11 +27,9 @@ const Details = () => {
                 <div className="w-[65%] bg-white rounded-b-lg pl-5 py-4 text-[#406367] text-base">
                     <span>ADDITIONAL VEHICLE INFORMATION:</span>
                     <ul>
-                        <li>Color: Bordeaux/Maroon</li>
-                        <li>Engine Capacity/Displacement (in Cc): 1461</li>
-                        <li>Insurance Type: Comprehensive</li>
-                        <li>Make Month: July</li>
-                        <li>Registration Place: CG</li>
+                        {description.split(" ").map((sentance) => (
+                            <li key={sentance}>{sentance}</li>
+                        ))}
                     </ul>
                 </div>
             </div>

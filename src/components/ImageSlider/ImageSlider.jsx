@@ -1,10 +1,9 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { imageLinks } from "../../constents";
 import { useState } from "react";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { CiHeart } from "react-icons/ci";
 
-const ImageSlider = () => {
+const ImageSlider = ({ imageLinks }) => {
     const [imageIdx, setImageIdx] = useState(0);
 
     const handleClick = (direction) => {
