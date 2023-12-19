@@ -1,6 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserSessionPersistence,
+} from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -15,8 +20,10 @@ export function AuthProvider({ children }) {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
-    function login(email, password) {
-        return signInWithEmailAndPassword(auth, email, password);
+    async function login(email, password) {
+        return setPersistence(auth, browserSessionPersistence).then(() => {
+            return signInWithEmailAndPassword(auth, email, password);
+        });
     }
 
     useEffect(() => {
