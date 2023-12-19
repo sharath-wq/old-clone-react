@@ -82,7 +82,9 @@ const Navbar = () => {
                     </Link>
                 )}
 
-                <CustomButton />
+                <Link to={"/sell"}>
+                    <CustomButton />
+                </Link>
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 import Product from "./Pages/product/Product";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import Form from "./pages/form/Form";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <Register />,
+            },
+            {
+                path: "sell",
+                element: <Form />,
             },
         ],
     },
