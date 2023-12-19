@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import toast from "react-hot-toast";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -14,6 +13,8 @@ const Register = () => {
     const [rePassword, setrePassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const { signup } = useAuth();
 
@@ -31,6 +32,8 @@ const Register = () => {
                 id: result.user.uid,
                 phone: phone,
             });
+
+            return navigate("/login");
         } catch (error) {
             setError("Faild to create and account");
             console.log(error);
